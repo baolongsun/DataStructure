@@ -17,6 +17,7 @@ class LinkStack:
             return data
     def show_top(self):
         if self.top:
+            print(self.top.data)
             return self.top.data
     def is_null(self):
         if self.top:
@@ -31,4 +32,11 @@ class LinkStack:
             temp = temp.next
         return ",".join(list)
 
-a = 2
+if __name__=="__main__":
+    temp_stack = LinkStack()
+    for k in range(100):
+        temp_stack.push(k)
+    temp_stack.pop()
+    temp_stack.show_top()
+    print(temp_stack)
+
