@@ -1,25 +1,58 @@
 class Array:
-    def __init__(self,num:int):
-        self.num = num
-        self.data = []
+    def __init__(self,data:int):
+        self.data = data
 
-    @property
-    def _len(self):
-        return len(self.data)
+class ArrayList:
+    def __init__(self,cap:int):
+        self.cap = cap
+        self.len = 0
+        self.array_map = {}
 
-    @property
-    def _get(self,index:int):
-        if index<self.num:
-            return self.data[index]
+    def show_array_len(self):
+        return self.len if self.len >= 0 else None
+
+    def push(self,data):
+        if self.len<self.cap:
+            temp_data:Array = Array(data)
+            self.array_map[self.len] = temp_data
+            self.len += 1
         else:
-            return None
+            print("cap is not enough")
 
     def insert(self,data,index:int):
-        if self._len < self.num-1:
-            if index < self._len:
-                self.data.append(0)
-                for i in range(self._len-2,self.index,-1):
-                     self.data[i+1] = self.data
-
+        if self.len<self.cap-1:
+            temp_data = Array(data)
+            self.array_map[self.len] = None
+            self.len += 1
+            for i in range(self.len,index,-1):
+                self.array_map[i] = self.array_map[i-1]
+            self.array_map[index] = temp_data
         else:
-            print("above the maximum of array!!!")
+            print("cap is not enough")
+
+    def delete(self,index:int):
+        for i in range(index,self.len-1):
+            self.array_map[i] = self.array_map[i+1]
+        self.len -= 1
+
+    def find(self,index:int):
+        return self.array_map[index].data if index<self.len-1 else None
+
+    def edit(self,data,index:int):
+        if index <self.len:
+           self.array_map[index].data = data
+
+    def __repr__(self):
+        list = [str(self.array_map[i].data) for i in range(self.len)]
+        return ",".join(list)
+
+
+if __name__ == "__main__":
+    q = ArrayList(100)
+    for k in range(10):
+        q.push(k)
+    print(q)
+    q.edit(100,0)
+    print(q)
+    q.find(10)
+
