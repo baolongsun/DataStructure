@@ -15,10 +15,12 @@ class LinkStack:
             data:int = self.top.data
             self.top = self.top.next
             return data
+    @property
     def show_top(self):
         if self.top:
-            print(self.top.data)
+            # print(self.top.data)
             return self.top.data
+    @property
     def is_null(self):
         if self.top:
             return False
